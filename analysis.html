@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="js/Chart.min.js"></script>
+	<link href="css/my.css" rel="stylesheet">
+	<title>IBM Big Data Challenge</title>
+	<script>
+		var pieChartData = [
+			//"Customer",1150379,"Subscriber",8574247
+			{
+		        value: 1150379,
+		        color:"#F7464A",
+		        highlight: "#FF5A5E",
+		        label: "Customer"
+		    },
+		    {
+		        value: 8574247,
+		        color: "#46BFBD",
+		        highlight: "#5AD3D1",
+		        label: "Subscriber"
+		    }
+		]
+		$(document).ready(function(){
+			var ctx = document.getElementById("canvas").getContext("2d");
+			myPieChart = new Chart(ctx).Pie(pieChartData, {
+				responsive : true,
+				animateScale : true,
+			});
+		});	
+	</script>
+</head>
+<body>
+	<div id="container">
+		<div id="header" class="header">
+			<span>Citi Bike Data Analysis</span><br/>
+		</div>
+		<div id="content">
+			<div class="sixty space">
+				<canvas id="canvas"></canvas>
+			</div>
+			<div id="dataset" class="forty space">
+				<table>
+					<tr>
+						<th> Key </th>
+						<th> User Type </th>
+						<th> # of Trips </th>
+					</tr>
+					<tr>
+						<td><div class="colorbox customer"></div></td>
+						<td>Customer</td>
+						<td>1150379</td>
+					</tr>
+					<tr>
+						<td><div class="colorbox subscriber"></div></td>
+						<td>Subscriber</td>
+						<td>8574247</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="footer">
+			<span class="title">Customer Subscriber Distribution</span>
+		</div>
+	</div>
+</body>
+</html>

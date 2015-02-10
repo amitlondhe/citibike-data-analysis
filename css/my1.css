@@ -1,0 +1,109 @@
+@CHARSET "UTF-8";
+html {
+    height: 100%;
+}
+body {
+    margin: 0;	
+    padding: 0;
+    height: 100%;
+}
+
+#container{
+	background: #18bc9c;
+	height:100%;
+	width:auto;
+	border: 1px solid red;
+	overflow: hidden;	
+	outline: #00FF00 solid thick;
+}
+
+.header {
+	background: #2c3e50;
+	text-align: center;
+	color: white;
+	text-transform: uppercase;
+	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-weight: 900;
+	font-size:2em;
+	padding-top: 1.5em;
+	padding-bottom: 1.5em;
+	height:15%
+}
+
+#content {
+height:65%;
+width:100%;
+}
+
+
+#canvas {
+height:100%;
+width:100%;
+}
+
+
+.title {
+	font-size:0.75em;
+	font-style: italic;
+}
+
+.sixty {
+	width: 60%; 
+	float: left;
+}
+
+.forty {
+	width: 40%;
+	float: left;
+}
+
+.space {
+	padding-top: 1em;
+	padding-bottom: 0.5em;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+th {
+	background-color: lemonchiffon;
+}
+td {
+	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+	color: white;
+}
+.colorbox {
+	height: 1em;
+	width: 1em;
+	border: none;
+}
+
+.customer {
+	background-color: #FF5A5E;
+}
+
+.subscriber {
+	background-color: #5AD3D1;
+}
+
+#footer {
+	height:15%;
+	clear:both;
+	background: #2c3e50;
+	text-align: center;
+	color: white;
+	text-transform: uppercase;
+	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-weight: 900;
+	font-size:2em;
+	padding-top: 0.5em;
+	padding-bottom: 1em;
+	border: 1px solid blue;
+}
+
+
