@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -7,7 +7,7 @@
 	<link href="css/my.css" rel="stylesheet">
 	<title>IBM Big Data Challenge</title>
 	<script>
-		var pieChartData = [
+ 		var pieChartData = [
 			//"Customer",1150379,"Subscriber",8574247
 			{
 		        value: 1150379,
@@ -21,14 +21,80 @@
 		        highlight: "#5AD3D1",
 		        label: "Subscriber"
 		    }
-		]
+		];
+		
+		subscriberData = [
+					//"Male",83 "Unknown",1150282 "Female",14
+					{
+				        value: 6587739,
+				        color:"Blue",
+				        highlight: "Blue",
+				        label: "Male"
+				    },
+					{
+				        value: 1985582,
+				        color:"Deeppink",
+				        highlight: "Deeppink",
+				        label: "Female"
+				    },
+					{
+				        value: 926,
+				        color:"Red",
+				        highlight: "darkgrey",
+				        label: "Unknown"
+					}
+		];
+
+		customerData = [
+					//"Male",83 "Unknown",1150282 "Female",14
+					{
+				        value: 83,
+				        color:"Blue",
+				        highlight: "Blue",
+				        label: "Male"
+				    },
+					{
+				        value: 14,
+				        color:"Deeppink",
+				        highlight: "Deeppink",
+				        label: "Female"
+				    },
+					{
+				        value: 1150282,
+				        color:"Red",
+				        highlight: "Red",
+				        label: "Unknown"
+				    }
+		];		
+				
 		$(document).ready(function(){
+		
 			var ctx = document.getElementById("canvas").getContext("2d");
-			myPieChart = new Chart(ctx).Pie(pieChartData, {
-				responsive : true,
-				animateScale : true,
-			});
-		});	
+			renderPieChart(pieChartData);
+			
+			function renderPieChart(pieChartData) {
+				myPieChart = new Chart(ctx).Pie(pieChartData, {
+					responsive : true,
+					animateScale : true,
+				});
+			}
+			
+			canvas.onclick = function(evt){
+		 		var activePoints = myPieChart.getSegmentsAtEvent(evt);
+		 		console.log("label clicked " + activePoints[0].label);
+		 		if("Customer" == activePoints[0].label) {
+		 			myPieChart.destroy();
+		 			console.log("Rendering gender distribution for Customers");
+					renderPieChart(customerData);
+		 		} else if("Subscriber" == activePoints[0].label)  {
+		 			myPieChart.destroy();
+		 			console.log("Rendering gender distribution for Subscriber");
+		 			renderPieChart(subscriberData);
+		 		} else {
+		 			return;
+		 		}
+			};
+		});	 
 	</script>
 </head>
 <body>
@@ -37,9 +103,9 @@
 			<span>Citi Bike Data Analysis</span><br/>
 		</div>
 		<div id="content">
-			<div class="sixty space">
+			<div id="chart-container" class="sixty space">
 				<canvas id="canvas"></canvas>
-			</div>
+			</div>					
 			<div id="dataset" class="forty space">
 				<table>
 					<tr>
