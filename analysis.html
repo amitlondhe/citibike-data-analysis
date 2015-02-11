@@ -2,9 +2,12 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<!-- <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script> -->
+	<script src="js/jquery.js"></script>
 	<script src="js/Chart.min.js"></script>
+	<script src="js/jquery.dataTables.js"></script>
 	<link href="css/my.css" rel="stylesheet">
+	<link href="css/jquery.dataTables.css" rel="stylesheet">
 	<title>IBM Big Data Challenge</title>
 	<script>
  		var pieChartData = [
@@ -77,6 +80,15 @@
 					responsive : true,
 					animateScale : true,
 				});
+				refreshDataTable(pieChartData);
+			}
+			
+			function refreshDataTable(pieChartData) {
+				$("#chart-data").DataTable({
+				"paging":   false,
+        		"ordering": false,
+       		 	"info":     false,
+       		 	"searching":	false});
 			}
 			
 			canvas.onclick = function(evt){
@@ -107,22 +119,26 @@
 				<canvas id="canvas"></canvas>
 			</div>					
 			<div id="dataset" class="forty space">
-				<table>
-					<tr>
-						<th> Key </th>
-						<th> User Type </th>
-						<th> # of Trips </th>
-					</tr>
-					<tr>
-						<td><div class="colorbox customer"></div></td>
-						<td>Customer</td>
-						<td>1150379</td>
-					</tr>
-					<tr>
-						<td><div class="colorbox subscriber"></div></td>
-						<td>Subscriber</td>
-						<td>8574247</td>
-					</tr>
+				<table id="chart-data" class="cell-border stripe hover" width="70%">
+					<thead>
+						<tr>
+							<th>Key</th>
+							<th>User Type</th>
+							<th># of Trips</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><div class="colorbox customer"></div></td>
+							<td>Customer</td>
+							<td>1150379</td>
+						</tr>
+						<tr>
+							<td><div class="colorbox subscriber"></div></td>
+							<td>Subscriber</td>
+							<td>8574247</td>
+						</tr>
+					</tbody>
 				</table>
 			</div>
 		</div>
