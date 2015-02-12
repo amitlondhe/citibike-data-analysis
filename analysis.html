@@ -5,9 +5,7 @@
 	<!-- <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script> -->
 	<script src="js/jquery.js"></script>
 	<script src="js/Chart.min.js"></script>
-	<script src="js/jquery.dataTables.js"></script>
 	<link href="css/my.css" rel="stylesheet">
-	<link href="css/jquery.dataTables.css" rel="stylesheet">
 	<title>IBM Big Data Challenge</title>
 	<script>
  		var pieChartData = [
@@ -42,7 +40,7 @@
 				    },
 					{
 				        value: 926,
-				        color:"Red",
+				        color:"grey",
 				        highlight: "darkgrey",
 				        label: "Unknown"
 					}
@@ -64,8 +62,8 @@
 				    },
 					{
 				        value: 1150282,
-				        color:"Red",
-				        highlight: "Red",
+				        color:"grey",
+				        highlight: "darkgrey",
 				        label: "Unknown"
 				    }
 		];		
@@ -74,22 +72,15 @@
 		
 			var ctx = document.getElementById("canvas").getContext("2d");
 			renderPieChart(pieChartData);
+			createTableForPieChart(pieChartData,"UserTypeDistribution");
 			
 			function renderPieChart(pieChartData) {
 				myPieChart = new Chart(ctx).Pie(pieChartData, {
 					responsive : true,
 					animateScale : true,
 				});
-				refreshDataTable(pieChartData);
 			}
 			
-			function refreshDataTable(pieChartData) {
-				$("#chart-data").DataTable({
-				"paging":   false,
-        		"ordering": false,
-       		 	"info":     false,
-       		 	"searching":	false});
-			}
 			
 			canvas.onclick = function(evt){
 		 		var activePoints = myPieChart.getSegmentsAtEvent(evt);
@@ -97,15 +88,43 @@
 		 		if("Customer" == activePoints[0].label) {
 		 			myPieChart.destroy();
 		 			console.log("Rendering gender distribution for Customers");
-					renderPieChart(customerData);
+		 			renderPieChart(customerData);
+					createTableForPieChart(customerData,"GenderDistribution");
+					updateChartTitle("Gender Distribution For Customers");
 		 		} else if("Subscriber" == activePoints[0].label)  {
 		 			myPieChart.destroy();
 		 			console.log("Rendering gender distribution for Subscriber");
 		 			renderPieChart(subscriberData);
+		 			createTableForPieChart(subscriberData,"GenderDistribution");
+		 			updateChartTitle("Gender Distribution For Subscribers");
 		 		} else {
 		 			return;
 		 		}
 			};
+			
+			function createTableForPieChart(pieChartData,pieChartFor) {
+				var tbody  = $('#chart-table > tbody');
+				var rows = $('#chart-table > tbody > tr')
+				console.log("rows.length" + rows.length);
+				for(i=0;i<rows.length;i++) {
+					rows[i].remove();
+				}
+				if(pieChartFor == "UserTypeDistribution") {
+					tbody.append("<tr class='pie-table-header'><td>Key</td><td>User Type</td><td># of Trips</td></tr>");
+				} else if(pieChartFor == "GenderDistribution") {
+					tbody.append("<tr class='pie-table-header'><td>Key</td><td>Gender</td><td># of Trips</td></tr>");
+				}
+				console.log("elements in Pie Chart - " + pieChartData.length);
+				for(i=0;i< pieChartData.length;i++) {
+					title = pieChartData[i].label;
+					value = pieChartData[i].value;
+					tbody.append("<tr class='pie-table-row'><td><div class=\"colorbox "+ title.toLowerCase() + "\"></div></td><td>"+title+"</td><td>"+value+"</td></tr>");
+				}
+			}
+			
+			function updateChartTitle(chartTitle) {
+				$("#header > span").last().text(chartTitle);
+			}
 		});	 
 	</script>
 </head>
@@ -113,37 +132,22 @@
 	<div id="container">
 		<div id="header" class="header">
 			<span>Citi Bike Data Analysis</span><br/>
+			<span class="chart-title">Customer Subscriber Distribution</span>
 		</div>
 		<div id="content">
 			<div id="chart-container" class="sixty space">
 				<canvas id="canvas"></canvas>
 			</div>					
 			<div id="dataset" class="forty space">
-				<table id="chart-data" class="cell-border stripe hover" width="70%">
-					<thead>
-						<tr>
-							<th>Key</th>
-							<th>User Type</th>
-							<th># of Trips</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><div class="colorbox customer"></div></td>
-							<td>Customer</td>
-							<td>1150379</td>
-						</tr>
-						<tr>
-							<td><div class="colorbox subscriber"></div></td>
-							<td>Subscriber</td>
-							<td>8574247</td>
-						</tr>
-					</tbody>
-				</table>
+				<table id="chart-table">
+					<tbody></tbody>
+				</table>​
 			</div>
 		</div>
 		<div id="footer">
-			<span class="title">Customer Subscriber Distribution</span>
+			<div id="nav">
+				<a id="UserTypeDistribution" href="#">UserTypeDistribution</a>
+			</div>			
 		</div>
 	</div>
 </body>
