@@ -27,13 +27,36 @@ body {
 	font-size:2em;
 	padding-top: 1.25em;
 	padding-bottom: 1.5em;
-	height:10%
+	height:10%;
+}
+
+.main-title {
+	/* outline:1px solid white; */
+	margin-top:0em;
+	padding-left:0.5em;
+	display:inline-block;
+	float:left;
+}
+
+.navlist {
+    display: inline-flex;
+    list-style-type: none;
+    font-size:medium;
+}
+
+li {
+	padding-right: 0.5em;
 }
 
 .chart-title {
+	clear:both;
+	padding-top:0.5em;
+	padding-bottom:0.5em;
 	font-size:0.75em;
 	font-style: italic;
+	border-top:1px solid aqua;
 }
+
 
 #content {
 	height:65%;
@@ -107,19 +130,7 @@ td {
 .unknown {
 	background-color:grey;
 }
-
-#nav {
-	display: inline-block;
-	outline-color: white;
-	float:left;
-}
-
-a {
-	color:white;
-	font-size: medium;
-	text-align: center;
-	padding-left:0.5em;
-}
+	
 
 #footer {
 	height:15%;

@@ -71,8 +71,12 @@
 		$(document).ready(function(){
 		
 			var ctx = document.getElementById("canvas").getContext("2d");
-			renderPieChart(pieChartData);
-			createTableForPieChart(pieChartData,"UserTypeDistribution");
+			createUserTypeDistributionPie();
+			
+			function createUserTypeDistributionPie() {
+				renderPieChart(pieChartData);
+				createTableForPieChart(pieChartData,"UserTypeDistribution");
+			}
 			
 			function renderPieChart(pieChartData) {
 				myPieChart = new Chart(ctx).Pie(pieChartData, {
@@ -80,7 +84,6 @@
 					animateScale : true,
 				});
 			}
-			
 			
 			canvas.onclick = function(evt){
 		 		var activePoints = myPieChart.getSegmentsAtEvent(evt);
@@ -123,7 +126,7 @@
 			}
 			
 			function updateChartTitle(chartTitle) {
-				$("#header > span").last().text(chartTitle);
+				$("#header > div").last().text(chartTitle);
 			}
 		});	 
 	</script>
@@ -131,8 +134,9 @@
 <body>
 	<div id="container">
 		<div id="header" class="header">
-			<span>Citi Bike Data Analysis</span><br/>
-			<span class="chart-title">Customer Subscriber Distribution</span>
+			<div class="main-title">Citi Bike Data Analysis</div>
+			<div><ul class="navlist"><li>UserType Distribution</li><li>Gender Distribution</li></ul></div>
+			<div class="chart-title">Customer Subscriber Distribution</div>
 		</div>
 		<div id="content">
 			<div id="chart-container" class="sixty space">
@@ -145,9 +149,9 @@
 			</div>
 		</div>
 		<div id="footer">
-			<div id="nav">
-				<a id="UserTypeDistribution" href="#">UserTypeDistribution</a>
-			</div>			
+			<div>
+				<ul class="navlist"><li>UserType Distribution</li><li>Gender Distribution</li></ul>
+			</div>	
 		</div>
 	</div>
 </body>
