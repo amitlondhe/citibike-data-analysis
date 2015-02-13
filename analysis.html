@@ -24,8 +24,32 @@
 		    }
 		];
 		
+
+		genderData = [
+					//Customer -   "Male",83 	  "Unknown",1150282 "Female",14
+					//Subscriber - "Male",6587739 "Unknown",926 	"Female",1985582
+					{
+				        value: 6587822,
+				        color:"Blue",
+				        highlight: "Blue",
+				        label: "Male"
+				    },
+					{
+				        value: 1985596,
+				        color:"Deeppink",
+				        highlight: "Deeppink",
+				        label: "Female"
+				    },
+					{
+				        value: 1151208,
+				        color:"grey",
+				        highlight: "darkgrey",
+				        label: "Unknown"
+				    }
+		];
+		
 		subscriberData = [
-					//"Male",83 "Unknown",1150282 "Female",14
+					//"Male",6587739 "Unknown",1985582 "Female",926
 					{
 				        value: 6587739,
 				        color:"Blue",
@@ -45,9 +69,9 @@
 				        label: "Unknown"
 					}
 		];
-
+		
 		customerData = [
-					//"Male",83 "Unknown",1150282 "Female",14
+					
 					{
 				        value: 83,
 				        color:"Blue",
@@ -67,6 +91,49 @@
 				        label: "Unknown"
 				    }
 		];		
+		
+		tripCategories = [
+			{
+				label: "0-1000",
+				value: 7098163,
+				color:"violet",
+			},
+			{
+				label: "1000-2000",
+				value: 2158332,
+				color:"blue",
+			},
+			{
+				label: "2000-3000",
+				value: 327115,
+				color:"green",
+			},
+			{
+				label: "3000-4000",
+				value: 30091,
+				color:"yellow",
+			},
+			{
+				label: "4000-5000",
+				value: 25400,
+				color:"orange"
+			},
+			{
+				label: "5000-8000",
+				value: 30091,
+				color:"red"
+			},															
+			{
+				label: "8000-10000",
+				value: 8418,
+				color:"white"
+			},	
+			{
+				label: "10000+",
+				value: 17591,
+				color:"chocolate"
+			},					
+		];	
 				
 		$(document).ready(function(){
 		
@@ -76,7 +143,20 @@
 			function createUserTypeDistributionPie() {
 				renderPieChart(pieChartData);
 				createTableForPieChart(pieChartData,"UserTypeDistribution");
+				updateChartTitle("Customer Subscriber Distribution");
 			}
+			
+			function createGenderDistributionPie() {
+				renderPieChart(genderData);
+				createTableForPieChart(genderData,"GenderDistribution");
+				updateChartTitle("Gender Distribution");
+			}			
+			
+			function createTripCategoriesPie() {
+				renderPieChart(tripCategories);
+				createTableForPieChart(tripCategories,"TripCategories");
+				updateChartTitle("Trips By Duration (seconds)");
+			}				
 			
 			function renderPieChart(pieChartData) {
 				myPieChart = new Chart(ctx).Pie(pieChartData, {
@@ -116,18 +196,36 @@
 					tbody.append("<tr class='pie-table-header'><td>Key</td><td>User Type</td><td># of Trips</td></tr>");
 				} else if(pieChartFor == "GenderDistribution") {
 					tbody.append("<tr class='pie-table-header'><td>Key</td><td>Gender</td><td># of Trips</td></tr>");
+				} else if(pieChartFor == "TripCategories") {
+					tbody.append("<tr class='pie-table-header'><td>Key</td><td>Trip Duration (s)</td><td># of Trips</td></tr>");
 				}
+				
 				console.log("elements in Pie Chart - " + pieChartData.length);
 				for(i=0;i< pieChartData.length;i++) {
 					title = pieChartData[i].label;
 					value = pieChartData[i].value;
-					tbody.append("<tr class='pie-table-row'><td><div class=\"colorbox "+ title.toLowerCase() + "\"></div></td><td>"+title+"</td><td>"+value+"</td></tr>");
+					color = pieChartData[i].color;
+					tbody.append("<tr class='pie-table-row'><td><div class='colorbox' style='background-color:"+ color + 
+					"'></div></td><td>"+title+"</td><td>"+value+"</td></tr>");
 				}
 			}
 			
 			function updateChartTitle(chartTitle) {
 				$("#header > div").last().text(chartTitle);
 			}
+			
+			$( "li" ).bind( "click", function() {
+  				menu = $(this).text();
+  				myPieChart.destroy();
+  				if(menu == "Users") {
+  					createUserTypeDistributionPie();
+  				} else if(menu == "Genders") {
+  					createGenderDistributionPie();
+  				}  else if(menu == "Trips") {
+  					createTripCategoriesPie();
+  				}
+			});
+			
 		});	 
 	</script>
 </head>
@@ -135,7 +233,14 @@
 	<div id="container">
 		<div id="header" class="header">
 			<div class="main-title">Citi Bike Data Analysis</div>
-			<div><ul class="navlist"><li>UserType Distribution</li><li>Gender Distribution</li></ul></div>
+			<div>
+				<ul class="navlist">
+					<li class="first">Users</li>
+					<li>Genders</li>
+					<li>Trips</li>
+					<li>Weather</li>
+				</ul>
+			</div>
 			<div class="chart-title">Customer Subscriber Distribution</div>
 		</div>
 		<div id="content">
@@ -150,7 +255,12 @@
 		</div>
 		<div id="footer">
 			<div>
-				<ul class="navlist"><li>UserType Distribution</li><li>Gender Distribution</li></ul>
+				<ul class="navlist">
+					<li class="first">Users</li>
+					<li>Genders</li>
+					<li>Trips</li>
+					<li>Weather</li>
+				</ul>
 			</div>	
 		</div>
 	</div>
