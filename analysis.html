@@ -136,7 +136,11 @@
 		];	
 				
 		$(document).ready(function(){
-		
+			
+			$("#users-submenu").hide();
+			$("#genders-submenu").hide();
+			$("#trips-submenu").hide();
+			
 			var ctx = document.getElementById("canvas").getContext("2d");
 			createUserTypeDistributionPie();
 			
@@ -211,20 +215,27 @@
 			}
 			
 			function updateChartTitle(chartTitle) {
-				$("#header > div").last().text(chartTitle);
+				$("#footer > div").last().text(chartTitle);
 			}
 			
-			$( "li" ).bind( "click", function() {
+			$( "a" ).bind( "click", function() {
   				menu = $(this).text();
   				myPieChart.destroy();
-  				if(menu == "Users") {
+  				if(menu == "Bikers") {
   					createUserTypeDistributionPie();
   				} else if(menu == "Genders") {
   					createGenderDistributionPie();
-  				}  else if(menu == "Trips") {
+  				} else if(menu == "Trips") {
   					createTripCategoriesPie();
+  				} else if(menu == "Weather") {
+  					createWeatherChart();
+  				} else if(menu == "Weather") {
+  					createWeatherChart();
   				}
 			});
+		
+			
+
 			
 		});	 
 	</script>
@@ -232,22 +243,39 @@
 <body>
 	<div id="container">
 		<div id="header" class="header">
-			<div class="main-title">Citi Bike Data Analysis</div>
-			<div>
-				<ul class="navlist">
-					<li class="first">Users</li>
-					<li>Genders</li>
-					<li>Trips</li>
-					<li>Weather</li>
+			<div class="main-title">Citi Bike Data Analysis (FEB2013 TO FEB2014)</div>
+			<div class="navdiv">
+				<ul>
+					<li><a href="#">Bikers</a>
+					     <ul>
+						    <li><a href="#">Customers</a></li>
+						    <li><a href="#">Subscribers</a></li>
+						</ul>					
+					</li>					
+					<li><a href="#">Genders</a>
+					     <ul>
+						    <li><a href="#">Customers</a></li>
+						    <li><a href="#">Subscribers</a></li>
+						</ul>					
+					</li>
+					<li><a href="#">Trips</a>
+					     <ul>
+						   <li><a href="#">Customers</a></li>
+						   <li><a href="#">Subscribers</a></li>
+						   <li><a href="#">Top 20 Trips</a></li>
+						   <li><a href="#">Top Stations</a></li>
+						</ul>						
+					</li>
+					<li><a href="#">Weather</a></li>
 				</ul>
 			</div>
-			<div class="chart-title">Customer Subscriber Distribution</div>
+			<!-- <div class="chart-title">Customer Subscriber Distribution</div> -->
 		</div>
 		<div id="content">
 			<div id="chart-container" class="sixty space">
 				<canvas id="canvas"></canvas>
 			</div>					
-			<div id="dataset" class="forty space">
+			<div id="dataset" class="forty space morespace">
 				<table id="chart-table">
 					<tbody></tbody>
 				</table>​
@@ -255,12 +283,6 @@
 		</div>
 		<div id="footer">
 			<div>
-				<ul class="navlist">
-					<li class="first">Users</li>
-					<li>Genders</li>
-					<li>Trips</li>
-					<li>Weather</li>
-				</ul>
 			</div>	
 		</div>
 	</div>

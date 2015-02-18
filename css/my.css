@@ -12,7 +12,7 @@ body {
 	background: #18bc9c;
 	height:100%;
 	width:auto;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 	overflow: hidden;	
 	/*outline: #00FF00 solid thick;*/
 }
@@ -36,13 +36,39 @@ body {
 	padding-left:0.5em;
 	display:inline-block;
 	float:left;
+	font-style: italic;
 }
 
+.navdiv {
+ float:right;
+ /* outline: 1px solid white; */
+ display: inline-block;
+ margin-top:0;
+ overflow: hidden;
+ position: relative;
+}
+
+/* 
+	Menu CSS
+	
 .navlist {
     display: inline-flex;
     list-style-type: none;
     font-size:medium;
+    outline: 1px solid yellow;
+    float: left;
+    margin-left: 10em;
 }
+
+
+.ul-secnav {
+	display: inline-flex;
+	list-style-type: none;
+	position:absolute;
+	top:2em;
+	left:0em;
+}
+
 
 .first {
 	border-left: 1px solid white;
@@ -55,11 +81,55 @@ li {
 	border-right: 1px solid white;
 }
 
-li:hover {
-	color: orange;
-	cursor: pointer;
-}
 
+ */
+/* Menu CSS */
+
+    ul{
+        padding: 0;
+        list-style: none;
+        text-transform: capitalize;
+    }
+    
+    ul li ul li {
+    	padding-right: 0.1em;
+    }
+    
+    ul li{
+        float: left;
+        width: 100px;
+        text-align: left;
+        line-height: 21px;
+        font-size: 0.6em;
+    }
+    
+    ul li ul{
+        display: none;
+    }
+
+	ul li a:hover {
+		color: orange;
+		cursor: pointer;
+	}
+	
+	ul li ul li a:hover {
+		color: yellow;
+		cursor: pointer;
+	}
+	
+    ul li:hover ul{
+        display: block; /* display the dropdown */
+    }
+
+    ul li a {
+        color:white;
+        text-decoration: none;
+    }
+
+
+/* Menu CSS */ 
+ 
+ 
 .chart-title {
 	clear:both;
 	padding-top:0.5em;
@@ -94,6 +164,10 @@ li:hover {
 .space {
 	padding-top: 1em;
 	padding-bottom: 0.5em;
+}
+
+.morespace {
+	padding-top: 5em;
 }
 
 table {
@@ -156,7 +230,7 @@ td {
 	font-size:2em;
 	padding-top: 0.5em;
 	padding-bottom: 1em;
-	border: 1px solid blue;
+	/* border: 1px solid blue; */
 }
 
 
