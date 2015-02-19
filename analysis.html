@@ -36,8 +36,13 @@
 			}				
 			
 			function createTopStationsBarChart() {
+				barChartDataTemplate.labels = [];
+				barChartDataSetTemplate.data = [];
+				barChartDataTemplate.datasets = [];
+				
 				barChartData = barChartDataTemplate;
 				barChartDataSet = barChartDataSetTemplate;
+
 
 				jQuery.each(topStations,function(index,station){
 					barChartData.labels.push(station.label);

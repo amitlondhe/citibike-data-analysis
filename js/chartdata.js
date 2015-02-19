@@ -144,7 +144,7 @@ topStations = [
 //}
 
 var barChartDataTemplate = {
-    labels: [],
+    labels:[],
     datasets: []
 };
 
