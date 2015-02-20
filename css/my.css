@@ -21,9 +21,9 @@ body {
 	background: #2c3e50;
 	text-align: center;
 	color: white;
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
 	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-	font-weight: 900;
+	font-weight: 600;
 	font-size:2em;
 	padding-top: 1.25em;
 	padding-bottom: 1.5em;
@@ -40,8 +40,8 @@ body {
 }
 
 .navdiv {
- float:right;
- /* outline: 1px solid white; */
+ /* float:right; 
+ outline: 1px solid white;*/
  display: inline-block;
  margin-top:0;
  overflow: hidden;
@@ -93,11 +93,14 @@ li {
     
     ul li ul li {
     	padding-right: 0.1em;
+    	border: 1px solid grey;
+    	border-bottom-color:black;
+    	background-color: grey;
     }
     
     ul li{
         float: left;
-        width: 100px;
+        width: 200px;
         text-align: left;
         line-height: 21px;
         font-size: 0.6em;

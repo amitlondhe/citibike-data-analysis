@@ -23,10 +23,10 @@
 				updateChartTitle("Customer Subscriber Distribution");
 			}
 			
-			function createGenderDistributionPie() {
+			function createGenderDistributionPie(genderData,chartTitle) {
 				renderPieChart(genderData);
 				createTableForPieChart(genderData,"GenderDistribution");
-				updateChartTitle("Gender Distribution");
+				updateChartTitle(chartTitle);
 			}			
 			
 			function createTripCategoriesPie() {
@@ -35,7 +35,7 @@
 				updateChartTitle("Trips By Duration (seconds)");
 			}				
 			
-			function createTopStationsBarChart() {
+			function createBarChart(menu) {
 				barChartDataTemplate.labels = [];
 				barChartDataSetTemplate.data = [];
 				barChartDataTemplate.datasets = [];
@@ -43,8 +43,18 @@
 				barChartData = barChartDataTemplate;
 				barChartDataSet = barChartDataSetTemplate;
 
-
-				jQuery.each(topStations,function(index,station){
+				var stationData;
+				if(menu == "Busy Stations") {
+					stationData = topStations;
+					updateChartTitle("Top 10 Stations ( # of Trips)");
+					createTableForBarChart("Busy Stations");
+				} else if (menu = "Quiet Stations") {
+					stationData = quietStations;
+					updateChartTitle("Quiet 10 Stations ( # of Trips)");
+					createTableForBarChart("Quiet Stations");					
+				}
+				
+				jQuery.each(stationData,function(index,station){
 					barChartData.labels.push(station.label);
 					barChartDataSet.data.push(station.value);
 				});
@@ -54,15 +64,16 @@
 					responsive : true,
 					animateScale : true,
 					scaleLineColor: "black",
-					scaleLineWidth: 2,
+					scaleLineWidth: 1,
 				});
-				updateChartTitle("Top 10 Stations ( # of Trips)");
+				
 			}
 			
 			function renderPieChart(pieChartData) {
 				myPieChart = new Chart(ctx).Pie(pieChartData, {
 					responsive : true,
 					animateScale : true,
+					segmentShowStroke : false,
 				});
 			}
 			
@@ -86,6 +97,30 @@
 		 		}
 			};
 			
+			
+			function createTableForBarChart(barChartFor) {
+				var tbody  = $('#chart-table > tbody');
+				var rows = $('#chart-table > tbody > tr')
+				console.log("rows.length" + rows.length);
+				for(i=0;i<rows.length;i++) {
+					rows[i].remove();
+				}
+				var stationData;
+				if(barChartFor == "Busy Stations") {
+					tbody.append("<tr class='pie-table-header'><td>Station Name</td><td># of Trips</td></tr>");
+					stationData = topStations;
+				} else if(barChartFor == "Quiet Stations") {
+					tbody.append("<tr class='pie-table-header'><td>Station Name</td><td># of Trips</td></tr>");
+					stationData = quietStations;					
+				}
+				
+				for(i=0;i< stationData.length;i++) {
+					stationName = stationData[i].label;
+					value = stationData[i].value;
+					tbody.append("<tr class='pie-table-row'><td>"+stationName+"</td><td>"+value+"</td></tr>");
+				}
+			}			
+			
 			function createTableForPieChart(pieChartData,pieChartFor) {
 				var tbody  = $('#chart-table > tbody');
 				var rows = $('#chart-table > tbody > tr')
@@ -101,7 +136,6 @@
 					tbody.append("<tr class='pie-table-header'><td>Key</td><td>Trip Duration (s)</td><td># of Trips</td></tr>");
 				}
 				
-				console.log("elements in Pie Chart - " + pieChartData.length);
 				for(i=0;i< pieChartData.length;i++) {
 					title = pieChartData[i].label;
 					value = pieChartData[i].value;
@@ -124,19 +158,22 @@
   				
   				if(menu == "Bikers") {
   					createUserTypeDistributionPie();
-  				} else if(menu == "Genders") {
-  					createGenderDistributionPie();
+  				} else if(menu == "Overall Gender Distribution") {
+  					createGenderDistributionPie(genderData,"Overall Gender Distribution");
+  				} else if(menu == "Gender Distribution Customers") {
+  					createGenderDistributionPie(customerData,"Customers - Gender Distribution");
+  				} else if(menu == "Gender Distribution Subscribers") {
+  					createGenderDistributionPie(subscriberData,"Subscribers - Gender Distribution");
   				} else if(menu == "Trips") {
   					createTripCategoriesPie();
-  				} else if(menu == "Top Stations") {
-  					createTopStationsBarChart();
+  				} else if(menu == "Busy Stations") {
+  					createBarChart(menu);
+  				} else if(menu == "Quiet Stations") {
+  					createBarChart(menu);
   				} else if(menu == "Weather") {
   					createWeatherChart();
   				}
 			});
-		
-			
-
 			
 		});	 
 	</script>
@@ -144,27 +181,20 @@
 <body>
 	<div id="container">
 		<div id="header" class="header">
-			<div class="main-title">Citi Bike Data Analysis (FEB2013 TO FEB2014)</div>
+			<div class="main-title">Citi Bike Data Analysis (Jul-2013 to Aug-2014)</div>
 			<div class="navdiv">
 				<ul>
 					<li><a href="#">Bikers</a>
 					     <ul>
-						    <li><a href="#">Customers</a></li>
-						    <li><a href="#">Subscribers</a></li>
-						</ul>					
-					</li>					
-					<li><a href="#">Genders</a>
-					     <ul>
-						    <li><a href="#">Customers</a></li>
-						    <li><a href="#">Subscribers</a></li>
+						    <li><a href="#">Gender Distribution Customers</a></li>
+						    <li><a href="#">Gender Distribution Subscribers</a></li>
+						    <li><a href="#">Overall Gender Distribution</a></li>
 						</ul>					
 					</li>
 					<li><a href="#">Trips</a>
 					     <ul>
-						   <li><a href="#">Customers</a></li>
-						   <li><a href="#">Subscribers</a></li>
-						   <li><a href="#">Top 20 Trips</a></li>
-						   <li><a href="#">Top Stations</a></li>
+						   <li><a href="#">Busy Stations</a></li>
+						   <li><a href="#">Quiet Stations</a></li>
 						</ul>						
 					</li>
 					<li><a href="#">Weather</a></li>

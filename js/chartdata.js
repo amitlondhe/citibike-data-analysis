@@ -138,10 +138,19 @@ topStations = [
                {label:"University Pl & E 14 St", value:70015}
 ];
 
-//function barChartDataTemplate(labels,datasets) {
-//	this.lables = labels;
-//	this.datasets = datasets;
-//}
+quietStations = [
+               {label:"Sands St & Gold St", value:3692},
+               {label:"Bedford Ave & S 9th St", value:3203},
+               {label:"Franklin Ave & Myrtle Ave", value:3095},
+               {label:"Monroe St & Classon Ave", value:3072},
+               {label:"Peck Slip & Front Street", value:2908},
+               {label:"Hanover Pl & Livingston St", value:2415},
+               {label:"Park Ave & St Edwards St", value:2109},
+               {label:"7 Ave & Farragut St", value:1426},
+               {label:"Railroad Ave & Kay Ave", value:1046},
+               {label:"Sands St & Navy St", value:500}
+];
+
 
 var barChartDataTemplate = {
     labels:[],
