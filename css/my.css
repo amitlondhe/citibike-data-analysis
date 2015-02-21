@@ -9,7 +9,7 @@ body {
 }
 
 #container{
-	background: #18bc9c;
+	background: rgb(238, 238, 238);
 	height:100%;
 	width:auto;
 	/* border: 1px solid red; */
@@ -18,9 +18,10 @@ body {
 }
 
 .header {
-	background: #2c3e50;
+	/* background: #2c3e50; */
+	background: #00406C;
 	text-align: center;
-	color: white;
+	color: DeepSkyBlue;
 	/* text-transform: uppercase; */
 	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-weight: 600;
@@ -48,87 +49,57 @@ body {
  position: relative;
 }
 
-/* 
-	Menu CSS
-	
-.navlist {
-    display: inline-flex;
-    list-style-type: none;
-    font-size:medium;
-    outline: 1px solid yellow;
-    float: left;
-    margin-left: 10em;
-}
 
-
-.ul-secnav {
-	display: inline-flex;
-	list-style-type: none;
-	position:absolute;
-	top:2em;
-	left:0em;
-}
-
-
-.first {
-	border-left: 1px solid white;
-}
-li {
-	padding-right: 0.2em;
-	padding-left: 0.2em;
-	text-transform: capitalize;
-	color: deepskyblue;
-	border-right: 1px solid white;
-}
-
-
- */
 /* Menu CSS */
 
-    ul{
-        padding: 0;
-        list-style: none;
-        text-transform: capitalize;
-    }
-    
-    ul li ul li {
-    	padding-right: 0.1em;
-    	border: 1px solid grey;
-    	border-bottom-color:black;
-    	background-color: grey;
-    }
-    
-    ul li{
-        float: left;
-        width: 200px;
-        text-align: left;
-        line-height: 21px;
-        font-size: 0.6em;
-    }
-    
-    ul li ul{
-        display: none;
-    }
+ul{
+    padding: 0;
+    list-style: none;
+    text-transform: capitalize;
+}
+   
+ul li ul li {
+	padding-right: 0.1em;
+	border: 1px solid grey;
+	border-bottom-color:black;
+	background-color: #F5FFFA;
+}
+   
+ul li{
+    float: left;
+    width: 200px;
+    text-align: left;
+    line-height: 21px;
+    font-size: 0.6em;
+}
 
-	ul li a:hover {
-		color: orange;
-		cursor: pointer;
-	}
-	
-	ul li ul li a:hover {
-		color: yellow;
-		cursor: pointer;
-	}
-	
-    ul li:hover ul{
-        display: block; /* display the dropdown */
-    }
+ul li ul{
+    display: none;
+}
 
-    ul li a {
-        color:white;
-        text-decoration: none;
-    }
+ul li a:hover {
+	color: orange;
+	cursor: pointer;
+}
 
+ul li ul li a:hover {
+	color: orange;
+	cursor: pointer;
+}
+
+ul li:hover ul{
+       display: block; /* display the dropdown */
+}
+
+ul li a {
+    color:DeepSkyBlue;
+    text-decoration: none;
+}
+
+ul li ul li a {
+    color:black;
+    text-decoration: none;
+}
 
 /* Menu CSS */ 
  
@@ -187,12 +158,12 @@ td {
     border: 1px solid black;
     border-collapse: collapse;
 	text-align: left;
-	background-color: lemonchiffon;
+	background-color: rgb(21, 165, 159);
 }
 
 .pie-table-row {
 	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-	color: white;
+	color: black ;
 	text-align: center;
 }
 .colorbox {
@@ -220,14 +191,21 @@ td {
 	background-color:grey;
 }
 	
+.tag-cloud{
+	border:thin solid grey;
+	background-color: yellow;
+	color:red;
+	margin:0.1%;
+	/* white-space: nowrap; */
+}
 
 #footer {
 	height:15%;
 	clear:both;
-	background: #2c3e50;
+	background: #00406C;
 	text-align: center;
-	color: white;
-	text-transform: uppercase;
+	color: DeepSkyBlue;
+	text-transform: capitalize;
 	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-weight: 900;
 	font-size:2em;

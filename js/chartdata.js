@@ -2,14 +2,12 @@ var pieChartData = [
 	//"Customer",1150379,"Subscriber",8574247
 	{
         value: 1150379,
-        color:"#F7464A",
-        highlight: "#FF5A5E",
+        color:"MediumOrchid",
         label: "Customer"
     },
     {
         value: 8574247,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
+        color: "RosyBrown",
         label: "Subscriber"
     }
 ];
@@ -151,6 +149,8 @@ quietStations = [
                {label:"Sands St & Navy St", value:500}
 ];
 
+allStation = [
+];
 
 var barChartDataTemplate = {
     labels:[],
@@ -159,9 +159,8 @@ var barChartDataTemplate = {
 
 var barChartDataSetTemplate = {
         label: "",
-        fillColor: "orange",
-        strokeColor: "yellow",
-        highlightFill: "rgba(220,220,220,0.75)",
-        highlightStroke: "rgba(220,220,220,1)",
+        fillColor: "Royalblue",
+        highlightFill: "blue",
+        barStrokeWidth : 1,
         data: []
 };

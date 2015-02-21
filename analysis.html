@@ -5,7 +5,9 @@
 	<!-- <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script> -->
 	<script src="js/jquery.js"></script>
 	<script src="js/chartdata.js"></script>
+	<script src="js/allstationsdata.js"></script>
 	<script src="js/Chart.min.js"></script>
+	<script src="js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script> 
 	<link href="css/my.css" rel="stylesheet">
 	<title>IBM Big Data Challenge</title>
 	<script>
@@ -65,6 +67,7 @@
 					animateScale : true,
 					scaleLineColor: "black",
 					scaleLineWidth: 1,
+					barShowStroke : false,
 				});
 				
 			}
@@ -152,6 +155,11 @@
 			$( "a" ).bind( "click", function() {
   				menu = $(this).text();
   				myPieChart.destroy();
+
+  				$("#chart-container").show();
+				$("#dataset").show();
+  				$("#tagcloud").remove();
+  				
   				if(myBarChart != null) {
   					myBarChart.destroy();
   				}
@@ -170,10 +178,41 @@
   					createBarChart(menu);
   				} else if(menu == "Quiet Stations") {
   					createBarChart(menu);
+  				} else if(menu == "All Stations") {
+  					createTagCloud(menu);
   				} else if(menu == "Weather") {
   					createWeatherChart();
   				}
 			});
+			
+			function createTagCloud() {
+				// Read the data and figure out the rel values
+				tags = "<div id='tagcloud' style='margin:1em'>";
+				jQuery.each(allStations,function(index,stationdata){
+					relValue = stationdata.value/1000;
+					tags = tags + "<span class='tag-cloud' rel=\"" + relValue + "\">"+ stationdata.label + "</span>";
+				});
+				tags = tags + "</div>";
+				var chartContainer = $("#chart-container").html();
+				var dataset = $("#dataset").html();
+				$("#chart-container").hide();
+				$("#dataset").hide();
+				$("#content").append(tags);
+				$("#tagcloud span").tagcloud({ 
+				   size: { 
+				     start: 0.1, 
+				     end: 2.1, 
+				     unit: 'em' 
+				   }, 
+				   color: { 
+				     start: "#CDE", 
+				     end: "#FS2" 
+				   } 
+				});
+			}
+			
+
+	
 			
 		});	 
 	</script>
@@ -181,7 +220,7 @@
 <body>
 	<div id="container">
 		<div id="header" class="header">
-			<div class="main-title">Citi Bike Data Analysis (Jul-2013 to Aug-2014)</div>
+			<div class="main-title">CitiBike Data Analysis (Jul-2013 to Aug-2014)</div>
 			<div class="navdiv">
 				<ul>
 					<li><a href="#">Bikers</a>
@@ -195,6 +234,7 @@
 					     <ul>
 						   <li><a href="#">Busy Stations</a></li>
 						   <li><a href="#">Quiet Stations</a></li>
+						   <li><a href="#">All Stations</a></li>
 						</ul>						
 					</li>
 					<li><a href="#">Weather</a></li>
