@@ -187,13 +187,13 @@
   				}
 			});
 			
-			function createTagCloud() {
+			function createTagCloud(menu) {
 				// Read the data and figure out the rel values
 				tags = "<div id='tagcloud'>";
 				allStations = shuffle(allStations);
 				jQuery.each(allStations,function(index,stationdata){
 					relValue = stationdata.value/1000;
-					tags = tags + "<span class='tag-cloud' rel=\"" + relValue + "\">"+ stationdata.label + "</span>";
+					tags = tags + "<span class='tag-cloud' rel=\"" + relValue + "\" title=\"# of Trips-" + stationdata.value + "\">"+ stationdata.label + "</span>";
 				});
 				tags = tags + "</div>";
 				var chartContainer = $("#chart-container").html();
@@ -211,14 +211,13 @@
 				
 				$( "div > span" ).bind( "mouseover", function() {
 				  $(this).css("background-color","yellow");
-				  var noOfTrips = $(this).attr("rel") * 1000;
-				  $(this).attr("title","# Of Trips " + noOfTrips);
 				  $(this).tooltip();
 				});
 				
 				$( "div > span" ).bind( "mouseout", function() {
 				  $(this).css("background-color","transparent");
 				});			
+				updateChartTitle("# Of Trips for All Stations");
 		
 			}
 			
