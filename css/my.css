@@ -192,12 +192,14 @@ td {
 }
 	
 .tag-cloud{
-	border:thin solid grey;
-	background-color: yellow;
-	color:red;
-	margin:0.1%;
-	/* white-space: nowrap; */
+	/* border:thin solid grey; */
+	/* background-color: peach; */
+	color:MidnightBlue;
+	margin:0.05%;
+	word-wrap; normal;
+    display: inline-block;
 }
+
 
 #footer {
 	height:15%;
