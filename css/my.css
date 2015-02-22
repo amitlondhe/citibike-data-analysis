@@ -209,12 +209,15 @@ td {
 }
 	
 .tag-cloud{
-	/* border:thin solid grey; */
-	/* background-color: peach; */
+	border:thin solid grey;
+	border-radius: 25px;
+	background-color: Gainsboro;
 	color:MidnightBlue;
+	padding:0.05%;
 	margin:0.05%;
 	word-wrap; normal;
     display: inline-block;
+    
 }
 
 
