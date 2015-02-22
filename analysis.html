@@ -18,7 +18,7 @@
 		$(document).ready(function(){
 			
 			var ctx = document.getElementById("canvas").getContext("2d");
-			var myPieChart,myBarChart;
+			var myPieChart,myBarChart,myLineChart;
 			createUserTypeDistributionPie();
 			
 			function createUserTypeDistributionPie() {
@@ -52,7 +52,7 @@
 					stationData = topStations;
 					updateChartTitle("Top 10 Stations ( # of Trips)");
 					createTableForBarChart("Busy Stations");
-				} else if (menu = "Quiet Stations") {
+				} else if (menu == "Quiet Stations") {
 					stationData = quietStations;
 					updateChartTitle("Quiet 10 Stations ( # of Trips)");
 					createTableForBarChart("Quiet Stations");					
@@ -62,8 +62,7 @@
 					barChartData.labels.push(station.label);
 					barChartDataSet.data.push(station.value);
 				});
-				barChartData.datasets.push(barChartDataSet);
-
+				barChartData.datasets.push(barChartDataSet);	
 				myBarChart = new Chart(ctx).Bar(barChartData,{
 					responsive : true,
 					animateScale : true,
@@ -71,8 +70,38 @@
 					scaleLineWidth: 1,
 					barShowStroke : false,
 				});
-				
 			}
+			
+			function createLineChart() {
+				var stationData = [];	
+				var lineDataSet1 =[];
+				var lineDataSet2 =[];
+				labels = [];
+				data = [];
+	
+				stationData = tripNWeatherByMonth;
+				
+				updateChartTitle("# of Trips by Weather");
+				//createTableForBarChart("MonthlyTripsVsWeather");		
+							
+				jQuery.each(stationData,function(index,station){
+					labels.push(station.label);
+					lineDataSet1.push(Math.floor(station.value/10000));				
+					lineDataSet2.push(station.tempf);
+				});
+				
+				dataSet1 = new lineDataSetTemplate("No Of Trips","red","orange","rgba(220,220,220,0.2)",lineDataSet1);
+				dataSet2 = new lineDataSetTemplate("Temp.","rgba(151,187,205,1)","rgba(151,187,205,1)","rgba(151,187,205,0.2)",lineDataSet2);
+
+				data.push(dataSet1);
+				data.push(dataSet2);
+				lineChartData = new lineDataTemplate(labels,data);
+
+				myLineChart = new Chart(ctx).Line(lineChartData,{
+				showScale: true,responsive: true,scaleShowLabels: true
+				});
+			}
+			
 			
 			function renderPieChart(pieChartData) {
 				myPieChart = new Chart(ctx).Pie(pieChartData, {
@@ -82,7 +111,12 @@
 				});
 			}
 			
+			
 			canvas.onclick = function(evt){
+				/* Only handling the main Pie Chart now through click events */
+				if($("#footer > div").text() != "Customer Subscriber Distribution") {
+					return;
+				}
 		 		var activePoints = myPieChart.getSegmentsAtEvent(evt);
 		 		console.log("label clicked " + activePoints[0].label);
 		 		if("Customer" == activePoints[0].label) {
@@ -156,11 +190,16 @@
 			
 			$( "a" ).bind( "click", function() {
   				menu = $(this).text();
-  				myPieChart.destroy();
-
+  				
   				$("#chart-container").show();
 				$("#dataset").show();
   				$("#tagcloud").remove();
+  				
+  				myPieChart.destroy();
+  				
+   				if(myLineChart != null) {
+  					myLineChart.destroy();
+  				}
   				
   				if(myBarChart != null) {
   					myBarChart.destroy();
@@ -183,13 +222,14 @@
   				} else if(menu == "All Stations") {
   					createTagCloud(menu);
   				} else if(menu == "Weather") {
-  					createWeatherChart();
+  					createLineChart(menu);
   				}
 			});
 			
 			function createTagCloud(menu) {
 				// Read the data and figure out the rel values
 				tags = "<div id='tagcloud'>";
+				//Shuffle so that busier stations stand out
 				allStations = shuffle(allStations);
 				jQuery.each(allStations,function(index,stationdata){
 					relValue = stationdata.value/1000;

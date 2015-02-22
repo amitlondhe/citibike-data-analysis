@@ -149,7 +149,22 @@ quietStations = [
                {label:"Sands St & Navy St", value:500}
 ];
 
-
+tripNWeatherByMonth = [
+	{label:"Jul-13",value:843416,tempf:26},
+	{label:"Aug-13",value:1001958,tempf:23},
+	{label:"Sep-13",value:1034359,tempf:19},
+	{label:"Oct-13",value:1037712,tempf:15},
+	{label:"Nov-13",value:675774,tempf:7},
+	{label:"Dec-13",value:443966,tempf:4},
+	{label:"Jan-14",value:300400,tempf:-2},
+	{label:"Feb-14",value:224736,tempf:0},
+	{label:"Mar-14",value:439117,tempf:3},
+	{label:"Apr-14",value:670780,tempf:11},
+	{label:"May-14",value:866117,tempf:17},
+	{label:"Jun-14",value:936880,tempf:22},
+	{label:"Jul-14",value:968842,tempf:24},
+	{label:"Aug-14",value:280570,tempf:23},
+];
 var barChartDataTemplate = {
     labels:[],
     datasets: []
@@ -162,6 +177,21 @@ var barChartDataSetTemplate = {
         barStrokeWidth : 1,
         data: []
 };
+
+function lineDataTemplate(labels,datasets) {
+	this.labels = labels;
+	this.datasets = datasets;
+}
+
+function lineDataSetTemplate(label,strokeColor,pointColor,fillColor,data) {
+	this.label=label;
+	this.strokeColor=strokeColor;
+	this.pointColor = pointColor;
+	this.fillColor = fillColor;
+	this.data = data;
+    this.pointHighlightFill= "#fff";
+    this.pointHighlightStroke= "rgba(151,187,205,1)";
+}
 
 
 function shuffle(array) {
