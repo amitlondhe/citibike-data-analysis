@@ -82,7 +82,7 @@
 				stationData = tripNWeatherByMonth;
 				
 				updateChartTitle("# of Trips by Weather");
-				//createTableForBarChart("MonthlyTripsVsWeather");		
+				createTableForLineChart(tripNWeatherByMonth,"MonthlyTripsVsWeather");		
 							
 				jQuery.each(stationData,function(index,station){
 					labels.push(station.label);
@@ -90,8 +90,8 @@
 					lineDataSet2.push(station.tempf);
 				});
 				
-				dataSet1 = new lineDataSetTemplate("No Of Trips","red","orange","rgba(220,220,220,0.2)",lineDataSet1);
-				dataSet2 = new lineDataSetTemplate("Temp.","rgba(151,187,205,1)","rgba(151,187,205,1)","rgba(151,187,205,0.2)",lineDataSet2);
+				dataSet1 = new lineDataSetTemplate("No Of Trips","red","orange","rgba(225,187,205,0.2)",lineDataSet1);
+				dataSet2 = new lineDataSetTemplate("Temp.","blue","rgba(151,187,205,1)","rgba(151,187,205,0.2)",lineDataSet2);
 
 				data.push(dataSet1);
 				data.push(dataSet2);
@@ -135,6 +135,21 @@
 		 			return;
 		 		}
 			};
+			
+			function createTableForLineChart(data,chartname) {
+				var tbody  = $('#chart-table > tbody');
+				var rows = $('#chart-table > tbody > tr')
+				for(i=0;i<rows.length;i++) {
+					rows[i].remove();
+				}
+				tbody.append("<tr class='pie-table-header big-table-header'><td>Month-Year</td><td># of Trips</td><td>Avg. Temp °F</td></tr>");
+				for(i=0;i< data.length;i++) {
+					monthYear = data[i].label;
+					trips = data[i].value;
+					avgTemp = data[i].tempf;
+					tbody.append("<tr class='pie-table-row big-table-row'><td>"+monthYear+"</td><td class='orange'>"+trips+"</td><td class='blue'>"+ avgTemp +"</td></tr>");
+				}			
+			}
 			
 			
 			function createTableForBarChart(barChartFor) {

@@ -141,7 +141,7 @@ ul li ul li a {
 }
 
 .morespace {
-	padding-top: 5em;
+	padding-top: 1em;
 }
 
 table {
@@ -166,6 +166,23 @@ td {
 	color: black ;
 	text-align: center;
 }
+
+.big-table-header {
+	font-size: small;
+}
+
+.big-table-row {
+	font-size: small;
+}
+
+.orange {
+	color: orange;
+}
+
+.blue {
+	color:blue;
+}
+
 .colorbox {
 	height: 1em;
 	width: 1em;
