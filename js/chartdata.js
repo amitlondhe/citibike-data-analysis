@@ -282,7 +282,7 @@ var top5TripsForStations = [
 	      ]},
 {station:"Broadway & E 14 St", lat:40.73454567,long:-73.99074142,
 	trips:[
-	      {station:"Washington Pl & Broadway","40.72903917,long:-73.99404649,trips:1948},
+	      {station:"Washington Pl & Broadway",40.72903917,long:-73.99404649,trips:1948},
 	      {station:"Lafayette St & E 8 St",lat:40.73028666,long:-73.9907647,trips:1612},
 	      {station:"E 10 St & Avenue A",lat:40.72740794,long:-73.98142006,trips:1582},
 	      {station:"E 13 St & Avenue A",lat:40.72955361,long:-73.98057249,trips:1458},
