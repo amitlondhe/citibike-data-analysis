@@ -165,6 +165,9 @@ tripNWeatherByMonth = [
 	{label:"Jul-14",value:968842,tempf:24},
 	{label:"Aug-14",value:280570,tempf:23},
 ];
+
+
+
 var barChartDataTemplate = {
     labels:[],
     datasets: []
@@ -204,3 +207,62 @@ function shuffle(array) {
 	    }
 	    return input;
 }
+
+function drawMap(stationData) {
+	  var image = 'img/beachflag.png';
+	  
+	  var mapOptions = {
+	    zoom: 13,
+	    /*Empire State is the center*/
+	    center: new google.maps.LatLng(40.746987,-73.982084)
+	  };
+	  var map = new google.maps.Map(
+			  document.getElementById('map-canvas'),
+			  mapOptions);
+
+	  var bikeLayer = new google.maps.BicyclingLayer();
+	  bikeLayer.setMap(map);
+
+	  var myStartStationLatlng = new google.maps.LatLng(stationData.lat, stationData.long);
+
+	  var start_station = new google.maps.Marker({
+		      position: myStartStationLatlng,
+		      map: map,
+		      title: stationData.station,
+		      icon: image
+		  });	
+	  	
+	  for(i=0;i<stationData.trips.length;i++) {
+		  endStation = stationData.trips[i];
+		  endStationLatLong = new google.maps.LatLng(endStation.lat,endStation.long);
+		  end_station = new google.maps.Marker({
+		      position: endStationLatLong,
+		      map: map,
+		      title: endStation.station,
+		      icon: image
+		  });		
+		  
+		  var bikePathCoordinates = [myStartStationLatlng,endStationLatLong];
+		  
+		  var bikePath = new google.maps.Polyline({
+		    path: bikePathCoordinates,
+		    geodesic: true,
+		    strokeColor: '#0000FF',
+		    strokeOpacity: 0.8,
+		    strokeWeight: 3
+		  });
+		  bikePath.setMap(map); 
+	  }  
+}
+
+var top5TripsForStations = [
+{station:"8 Ave & W 31 St", lat:40.75044999,long:-73.99481051,
+	trips:[
+	      {station:"9 Ave & W 16 St",lat:40.74206539,long:-74.00443172,trips:463},
+	      {station:"W 22 St & 10 Ave",lat:40.74691959,long:-74.00451887,trips:462},
+	      {station:"11 Ave & W 27 St",lat:40.751396,long:-74.005226,trips:458},
+	      {station:"W 49 St & 8 Ave",lat:40.76227205,long:-73.98788205,trips:450},
+	      {station:"8 Ave & W 52 St",lat:40.76370739,long:-73.9851615,trips:447}
+	      ]}
+];
+
