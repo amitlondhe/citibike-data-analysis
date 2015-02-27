@@ -306,19 +306,19 @@ var top5TripsForStations = [
 	      ]},
 {station:"8 Ave & W 33 St", lat:40.751551,long:-73.993934,
 	trips:[
-			{station:"W 37 St & 10 Ave",lat:40.75660359",long:-73.9979009,trips:1977},
-			{station:"8 Ave & W 52 St",lat:40.76370739",long:-73.9851615,trips:1686},
-			{station:"W 34 St & 11 Ave",lat:40.75594159",long:-74.0021163,trips:1621},
-			{station:"11 Ave & W 41 St",lat:40.76030096",long:-73.99884222,trips:1523},
-			{station:"Pershing Square N",lat:40.75188406",long:-73.97770164,rips:1499}
+			{station:"W 37 St & 10 Ave",lat:40.75660359,long:-73.9979009,trips:1977},
+			{station:"8 Ave & W 52 St",lat:40.76370739,long:-73.9851615,trips:1686},
+			{station:"W 34 St & 11 Ave",lat:40.75594159,long:-74.0021163,trips:1621},
+			{station:"11 Ave & W 41 St",lat:40.76030096,long:-73.99884222,trips:1523},
+			{station:"Pershing Square N",lat:40.75188406,long:-73.97770164,rips:1499}
 	      ]},
 {station:"Cleveland Pl & Spring St", lat:40.7218158,long:-73.99720307,
 	trips:[
-			{station:"Lafayette St & E 8 St",lat:40.73028666",long:-73.9907647,trips:2451},
-			{station:"MacDougal St & Prince St",lat:40.72710258",long:-74.00297088,trips:1427},
-			{station:"Broadway & E 14 St",lat:40.73454567",long:-73.99074142,trips:1173},
-			{station:"Great Jones St",lat:40.72743423",long:-73.99379025,trips:1170},
-			{station:"E 17 St & Broadway",lat:40.73704984",long:-73.99009296,trips:1082}	
+			{station:"Lafayette St & E 8 St",lat:40.73028666,long:-73.9907647,trips:2451},
+			{station:"MacDougal St & Prince St",lat:40.72710258,long:-74.00297088,trips:1427},
+			{station:"Broadway & E 14 St",lat:40.73454567,long:-73.99074142,trips:1173},
+			{station:"Great Jones St",lat:40.72743423,long:-73.99379025,trips:1170},
+			{station:"E 17 St & Broadway",lat:40.73704984,long:-73.99009296,trips:1082}	
 	      ]},
 {station:"Broadway & E 22 St", lat:40.7403432,long:-73.98955109,
 	trips:[
