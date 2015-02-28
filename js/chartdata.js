@@ -231,7 +231,7 @@ function drawMap(stationName) {
 	});
 
 	
-	  var image = ''; // Use default image
+	  var image = 'img/favicon-1-small.png'; // Use custom image
 	  var myStartStationLatlng = new google.maps.LatLng(stationData.lat, stationData.long);
 	  
 	  var mapOptions = {
