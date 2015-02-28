@@ -231,12 +231,11 @@ function drawMap(stationName) {
 	});
 
 	
-	  var image = 'img/beachflag.png';
+	  var image = ''; // Use default image
 	  var myStartStationLatlng = new google.maps.LatLng(stationData.lat, stationData.long);
 	  
 	  var mapOptions = {
 	    zoom: 14,
-	    /*Empire State is the center*/
 	    center: myStartStationLatlng
 	  };
 	  var map = new google.maps.Map(
