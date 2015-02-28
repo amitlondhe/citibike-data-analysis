@@ -60,9 +60,18 @@ ul{
    
 ul li ul li {
 	padding-right: 0.1em;
-	border: 1px solid grey;
+	padding-left:0.1em;
+	border: 1px solid lightblue;
 	border-bottom-color:black;
-	background-color: #F5FFFA;
+	background-color: lightblue;
+}
+
+ul li ul li:hover {
+	padding-right: 0.1em;
+	padding-left:0.1em;
+	border: 1px solid lightblue;
+	border-bottom-color:black;
+	background-color: #9CC2CF;
 }
    
 ul li{
@@ -83,7 +92,7 @@ ul li a:hover {
 }
 
 ul li ul li a:hover {
-	color: orange;
+	color:white;
 	cursor: pointer;
 }
 
@@ -97,7 +106,7 @@ ul li a {
 }
 
 ul li ul li a {
-    color:black;
+    color:midnightblue;
     text-decoration: none;
 }
 
