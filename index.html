@@ -124,7 +124,7 @@
 /* 				if($("#footer > div").text() != "Customer Subscriber Distribution") {
 					return;
 				}
- */				
+ *				*/				
 				if(myBarChart != null) {
 					var activeBars = myBarChart.getBarsAtEvent(evt);
 					drawMap(activeBars[0].label);
@@ -226,7 +226,10 @@
 				$("#dataset").show();
   				$("#tagcloud").remove();
   				
-  				myPieChart.destroy();
+  				if(myPieChart != null) {
+  					myPieChart.destroy();
+  					myPieChart = null;
+  				}
   				
    				if(myLineChart != null) {
   					myLineChart.clear().destroy();
