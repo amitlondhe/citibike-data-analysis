@@ -121,26 +121,35 @@
 			
 			canvas.onclick = function(evt){
 				/* Only handling the main Pie Chart now through click events */
-				if($("#footer > div").text() != "Customer Subscriber Distribution") {
+/* 				if($("#footer > div").text() != "Customer Subscriber Distribution") {
 					return;
 				}
-		 		var activePoints = myPieChart.getSegmentsAtEvent(evt);
-		 		console.log("label clicked " + activePoints[0].label);
-		 		if("Customer" == activePoints[0].label) {
-		 			myPieChart.destroy();
-		 			console.log("Rendering gender distribution for Customers");
-		 			renderPieChart(customerData);
-					createTableForPieChart(customerData,"GenderDistribution");
-					updateChartTitle("Gender Distribution For Customers");
-		 		} else if("Subscriber" == activePoints[0].label)  {
-		 			myPieChart.destroy();
-		 			console.log("Rendering gender distribution for Subscriber");
-		 			renderPieChart(subscriberData);
-		 			createTableForPieChart(subscriberData,"GenderDistribution");
-		 			updateChartTitle("Gender Distribution For Subscribers");
-		 		} else {
-		 			return;
-		 		}
+ */				
+				if(myBarChart != null) {
+					var activeBars = myBarChart.getBarsAtEvent(evt);
+					drawMap(activeBars[0].label);
+					return;
+				} else if(myPieChart != null) {
+			 		var activePoints = myPieChart.getSegmentsAtEvent(evt);
+			 		console.log("label clicked " + activePoints[0].label);
+			 		if("Customer" == activePoints[0].label) {
+			 			myPieChart.destroy();
+			 			console.log("Rendering gender distribution for Customers");
+			 			renderPieChart(customerData);
+						createTableForPieChart(customerData,"GenderDistribution");
+						updateChartTitle("Gender Distribution For Customers");
+			 		} else if("Subscriber" == activePoints[0].label)  {
+			 			myPieChart.destroy();
+			 			console.log("Rendering gender distribution for Subscriber");
+			 			renderPieChart(subscriberData);
+			 			createTableForPieChart(subscriberData,"GenderDistribution");
+			 			updateChartTitle("Gender Distribution For Subscribers");
+			 		} else {
+			 			return;
+			 		}
+			 	} else {
+			 		return;
+			 	}
 			};
 			
 			function createTableForLineChart(data,chartname) {
@@ -220,14 +229,16 @@
   				myPieChart.destroy();
   				
    				if(myLineChart != null) {
-  					myLineChart.destroy();
+  					myLineChart.clear().destroy();
+  					myLineChart = null;
   				}
   				
   				if(myBarChart != null) {
-  					myBarChart.destroy();
+  					myBarChart.clear().destroy();
+  					myBarChart = null;
   				}
   				
-  				if(menu == "Bikers") {
+  				if(menu == "User Type Distribution") {
   					createUserTypeDistributionPie();
   				} else if(menu == "Overall Gender Distribution") {
   					createGenderDistributionPie(genderData,"Overall Gender Distribution");
@@ -235,7 +246,7 @@
   					createGenderDistributionPie(customerData,"Customers - Gender Distribution");
   				} else if(menu == "Gender Distribution Subscribers") {
   					createGenderDistributionPie(subscriberData,"Subscribers - Gender Distribution");
-  				} else if(menu == "Trips") {
+  				} else if(menu == "Overall Trip Categories") {
   					createTripCategoriesPie();
   				} else if(menu == "Busy Stations") {
   					createBarChart(menu);
@@ -243,15 +254,7 @@
   					createBarChart(menu);
   				} else if(menu == "All Stations") {
   					createTagCloud(menu);
-  				} else if(menu == "Weather") {
-  					$( "#map-canvas" ).dialog({
-					      modal: true,
-					      height:500,
-					      width:700,
-					      resizable: false,
-					      dialogClass: "info"
-					});
-					drawMap(top5TripsForStations[0]);
+  				} else if(menu == "Trips Vs Weather") {
   					createLineChart(menu);
   				}
 			});
@@ -300,23 +303,25 @@
 			<div class="main-title">CitiBike Data Analysis (Jul-2013 to Aug-2014)</div>
 			<div class="navdiv">
 				<ul>
-					<li><a href="#">Bikers</a>
+					<li>Bikers
 					     <ul>
+					     	<li><a href="#">User Type Distribution</a></li>
 						    <li><a href="#">Gender Distribution Customers</a></li>
 						    <li><a href="#">Gender Distribution Subscribers</a></li>
 						    <li><a href="#">Overall Gender Distribution</a></li>
 						</ul>					
 					</li>
-					<li><a href="#">Trips</a>
+					<li>Trips
 					     <ul>
+					       <li><a href="#">Overall Trip Categories</a></li>
 						   <li><a href="#">Busy Stations</a></li>
 						   <li><a href="#">Quiet Stations</a></li>
 						   <li><a href="#">All Stations</a></li>
 						</ul>						
 					</li>
-					<li><a href="#">Weather</a>
+					<li>Weather
 						<ul>
-						   <li><a href="maps.html">Maps</a></li>
+						   <li><a href="#">Trips Vs Weather</a></li>
 						</ul>				
 					</li>
 				</ul>

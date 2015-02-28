@@ -2,12 +2,12 @@ var pieChartData = [
 	//"Customer",1150379,"Subscriber",8574247
 	{
         value: 1150379,
-        color:"MediumOrchid",
+        color:"orange",
         label: "Customer"
     },
     {
         value: 8574247,
-        color: "RosyBrown",
+        color: "DodgerBlue",
         label: "Subscriber"
     }
 ];
@@ -84,7 +84,7 @@ tripCategories = [
 	{
 		label: "0-1000",
 		value: 7098163,
-		color:"violet",
+		color:"DodgerBlue",
 	},
 	{
 		label: "1000-2000",
@@ -114,7 +114,7 @@ tripCategories = [
 	{
 		label: "8000-10000",
 		value: 8418,
-		color:"magenta"
+		color:"DarkMagenta"
 	},	
 	{
 		label: "10000+",
@@ -208,13 +208,36 @@ function shuffle(array) {
 	    return input;
 }
 
-function drawMap(stationData) {
+function drawMap(stationName) {
+	
+	var stationData = null;
+	jQuery.each(top5TripsForStations,function(index,element){
+		if(element.station == stationName) {
+			stationData = element;
+		}
+	});
+	
+	if(!stationData) {
+		return;
+	}
+	
+	$("#map-canvas").dialog({
+	      modal: true,
+	      height:500,
+	      width:700,
+	      resizable: false,
+	      dialogClass: "info",
+	      title: "Top 5 Trips for " + stationName,
+	});
+
+	
 	  var image = 'img/beachflag.png';
+	  var myStartStationLatlng = new google.maps.LatLng(stationData.lat, stationData.long);
 	  
 	  var mapOptions = {
-	    zoom: 13,
+	    zoom: 14,
 	    /*Empire State is the center*/
-	    center: new google.maps.LatLng(40.746987,-73.982084)
+	    center: myStartStationLatlng
 	  };
 	  var map = new google.maps.Map(
 			  document.getElementById('map-canvas'),
@@ -223,13 +246,13 @@ function drawMap(stationData) {
 	  var bikeLayer = new google.maps.BicyclingLayer();
 	  bikeLayer.setMap(map);
 
-	  var myStartStationLatlng = new google.maps.LatLng(stationData.lat, stationData.long);
 
 	  var start_station = new google.maps.Marker({
 		      position: myStartStationLatlng,
 		      map: map,
 		      title: stationData.station,
-		      icon: image
+		      icon: image,
+		      animation: google.maps.Animation.DROP,
 		  });	
 	  	
 	  for(i=0;i<stationData.trips.length;i++) {
@@ -239,7 +262,7 @@ function drawMap(stationData) {
 		      position: endStationLatLong,
 		      map: map,
 		      title: endStation.station,
-		      icon: image
+		      icon: image,
 		  });		
 		  
 		  var bikePathCoordinates = [myStartStationLatlng,endStationLatLong];
