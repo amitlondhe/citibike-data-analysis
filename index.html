@@ -31,7 +31,8 @@
 			function createUserTypeDistributionPie() {
 				renderPieChart(pieChartData);
 				createTableForPieChart(pieChartData,"UserTypeDistribution");
-				updateChartTitle("Customer Subscriber Distribution");
+				additionalNote = "Please click on respective Pie to see Gender distribution for respective User type."
+				updateChartTitle("Customer Subscriber Distribution",additionalNote);
 			}
 			
 			function createGenderDistributionPie(genderData,chartTitle) {
@@ -57,7 +58,8 @@
 				var stationData;
 				if(menu == "Busy Stations") {
 					stationData = topStations;
-					updateChartTitle("Top 10 Stations ( # of Trips)");
+					additionalNote = "Please click on the Bar to delve into Top 5 destinations traveled from respective station."
+					updateChartTitle("Top 10 Stations ( # of Trips)",additionalNote);
 					createTableForBarChart("Busy Stations");
 				} else if (menu == "Quiet Stations") {
 					stationData = quietStations;
@@ -215,13 +217,49 @@
 				}
 			}
 			
-			function updateChartTitle(chartTitle) {
-				$("#footer > div").last().text(chartTitle);
+			function updateChartTitle(chartTitle,additionalNote) {
+			    if(!jQuery.isEmptyObject(additionalNote)) {
+			    	additionalNote = "<br/><span class='additional-note'>"+additionalNote+"</span>";
+			    	chartTitle = chartTitle + additionalNote;
+			    }
+				$("#footer > div").last().html(chartTitle);
 			}
 			
 			$( "a" ).bind( "click", function() {
+			 	
   				menu = $(this).text();
   				
+  				if(menu == "User Type Distribution") {
+  					resetApp();
+  					createUserTypeDistributionPie();
+  				} else if(menu == "Overall Gender Distribution") {
+  					resetApp();
+  					createGenderDistributionPie(genderData,"Overall Gender Distribution");
+  				} else if(menu == "Gender Distribution Customers") {
+  					resetApp();
+  					createGenderDistributionPie(customerData,"Customers - Gender Distribution");
+  				} else if(menu == "Gender Distribution Subscribers") {
+  					resetApp();
+  					createGenderDistributionPie(subscriberData,"Subscribers - Gender Distribution");
+  				} else if(menu == "Overall Trip Categories") {
+  					resetApp();
+  					createTripCategoriesPie();
+  				} else if(menu == "Busy Stations") {
+  					resetApp();
+  					createBarChart(menu);
+  				} else if(menu == "Quiet Stations") {
+  					resetApp();
+  					createBarChart(menu);
+  				} else if(menu == "All Stations") {
+  					resetApp();
+  					createTagCloud(menu);
+  				} else if(menu == "Trips Vs Weather") {
+  					resetApp();
+  					createLineChart(menu);
+  				}
+			});
+			
+			function resetApp() {
   				$("#chart-container").show();
 				$("#dataset").show();
   				$("#tagcloud").remove();
@@ -239,28 +277,8 @@
   				if(myBarChart != null) {
   					myBarChart.clear().destroy();
   					myBarChart = null;
-  				}
-  				
-  				if(menu == "User Type Distribution") {
-  					createUserTypeDistributionPie();
-  				} else if(menu == "Overall Gender Distribution") {
-  					createGenderDistributionPie(genderData,"Overall Gender Distribution");
-  				} else if(menu == "Gender Distribution Customers") {
-  					createGenderDistributionPie(customerData,"Customers - Gender Distribution");
-  				} else if(menu == "Gender Distribution Subscribers") {
-  					createGenderDistributionPie(subscriberData,"Subscribers - Gender Distribution");
-  				} else if(menu == "Overall Trip Categories") {
-  					createTripCategoriesPie();
-  				} else if(menu == "Busy Stations") {
-  					createBarChart(menu);
-  				} else if(menu == "Quiet Stations") {
-  					createBarChart(menu);
-  				} else if(menu == "All Stations") {
-  					createTagCloud(menu);
-  				} else if(menu == "Trips Vs Weather") {
-  					createLineChart(menu);
-  				}
-			});
+  				}			
+			}
 			
 			function createTagCloud(menu) {
 				// Read the data and figure out the rel values
@@ -269,7 +287,8 @@
 				allStations = shuffle(allStations);
 				jQuery.each(allStations,function(index,stationdata){
 					relValue = stationdata.value/1000;
-					tags = tags + "<span class='tag-cloud' rel=\"" + relValue + "\" title=\"# of Trips-" + stationdata.value + "\">"+ stationdata.label + "</span>";
+					tags = tags + "<span class='tag-cloud' rel=\"" + relValue + 
+						"\" title=\"" + stationdata.label + "&#013; # of Trips-" + stationdata.value + "\">"+ stationdata.label + "</span>";
 				});
 				tags = tags + "</div>";
 				var chartContainer = $("#chart-container").html();
@@ -293,7 +312,8 @@
 				$( "div > span" ).bind( "mouseout", function() {
 				  $(this).css("background-color","Gainsboro");
 				});			
-				updateChartTitle("# Of Trips for All Stations");
+				additionalNote = "Hover over station to see number of trips from the station."
+				updateChartTitle("Station Cloud",additionalNote);
 		
 			}
 			
@@ -303,10 +323,10 @@
 <body>
 	<div id="container">
 		<div id="header" class="header">
-			<div class="main-title">CitiBike Data Analysis (Jul-2013 to Aug-2014)</div>
+			<div class="main-title">A year of CitiBike (July-2013 To August-2014)</div>
 			<div class="navdiv">
 				<ul>
-					<li>Bikers
+					<li><a href="#">Bikers</a>
 					     <ul>
 					     	<li><a href="#">User Type Distribution</a></li>
 						    <li><a href="#">Gender Distribution Customers</a></li>
@@ -314,7 +334,7 @@
 						    <li><a href="#">Overall Gender Distribution</a></li>
 						</ul>					
 					</li>
-					<li>Trips
+					<li><a href="#">Trips</a>
 					     <ul>
 					       <li><a href="#">Overall Trip Categories</a></li>
 						   <li><a href="#">Busy Stations</a></li>
@@ -322,7 +342,7 @@
 						   <li><a href="#">All Stations</a></li>
 						</ul>						
 					</li>
-					<li>Weather
+					<li><a href="#">Weather</a>
 						<ul>
 						   <li><a href="#">Trips Vs Weather</a></li>
 						</ul>				

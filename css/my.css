@@ -41,8 +41,8 @@ body {
 }
 
 .navdiv {
- /* float:right; 
- outline: 1px solid white;*/
+/*  float:right; 
+ outline: 1px solid white; */
  display: inline-block;
  margin-top:0;
  overflow: hidden;
@@ -88,7 +88,7 @@ ul li ul{
 
 ul li a:hover {
 	color: orange;
-	cursor: pointer;
+	cursor: auto; 
 }
 
 ul li ul li a:hover {
@@ -226,9 +226,14 @@ td {
 	margin:0.05%;
 	word-wrap; normal;
     display: inline-block;
-    
 }
 
+.additional-note {
+	font-style: italic;
+	font-weight:100;
+	font-size:0.5em;
+	color:yellow;
+}
 
 #footer {
 	height:15%;
